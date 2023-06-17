@@ -9,6 +9,7 @@ Although `echoserver` is running in the cluster and configured to serve traffic 
 * Docker (licensed)
 * KinD
 * Helm
+* jq
 
 ### Resources
 - https://kind.sigs.k8s.io/docs/user/configuration/

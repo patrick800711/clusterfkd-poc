@@ -6,10 +6,10 @@ wn2Ready=false
 
 # Deploy and bootstrap cluster with calico
 kind create cluster --config cluster-build.yaml
+kubectl taint nodes klusterfkd-control-plane node-role.kubernetes.io/control-plane-
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
-
-sleep 600
+sleep 60
 
 # Install services
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
