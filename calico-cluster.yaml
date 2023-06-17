@@ -1,12 +1,12 @@
 apiVersion: kind.x-k8s.io/v1alpha4
 kind: Cluster
-name: klusterfkd
+name: calico
 nodes:
   - role: control-plane
   - role: worker
   - role: worker
 networking:
   # disable kindnet, so we can install our own CNI once cluster is created
-  # disableDefaultCNI: true
+  disableDefaultCNI: true
   # set the pod subnet
-  podSubnet: "100.100.100.0/24"
+  podSubnet: "192.168.0.0/16"
