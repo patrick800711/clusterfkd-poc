@@ -12,13 +12,14 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 helm repo add ealenn https://ealenn.github.io/charts
 helm repo update
 helm upgrade -i fkd ealenn/echo-server --namespace echoserver --create-namespace --force
-echo "Waiting for nginx (this may take a few minutes) ..."
+echo "Waiting for pods to go ready (this may take a few minutes) ..."
 sleep 30
 while [ $ingressReady = "false" ]; do
   sleep 10
   ingressReady=$(kubectl -n ingress-nginx get pods -ojson | jq -r '.items[] | select(.metadata.name | test("ingress-nginx-controller.")) | .status.containerStatuses[].ready')
-  echo "..nginx ready: ${ingressReady}"
+  echo "..pods ready: ${ingressReady}"
 done
 
 # Apply manifest and finalise environment
-base64 -d -i cluster-config.yaml | kubectl apply -f -
+base64 -d -i cluster-config.yaml | kubectl apply -f - >/dev/null
+echo "All set, enjoy!"
