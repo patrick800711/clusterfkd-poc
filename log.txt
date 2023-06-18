@@ -1,7 +1,0 @@
-namespace/ingress created
-namespace/echoserver created
-Hang tight while we grab the latest from your chart repositories...
-...Unable to get an update from the "bitnami" chart repository (https://charts.bitnami.com/bitnami):
-	Get "https://charts.bitnami.com/bitnami/index.yaml": dial tcp: lookup charts.bitnami.com: no such host
-...Unable to get an update from the "projectcalico" chart repository (https://docs.tigera.io/calico/charts):
-	Get "https://docs.tigera.io/calico/charts/index.yaml": dial tcp: lookup docs.tigera.io: no such host

@@ -1,15 +1,11 @@
 #!/bin/zsh
 ingressReady=false
-cpReady=false
-wn1Ready=false
-wn2Ready=false
 
 # Deploy and bootstrap cluster with calico
 kind create cluster --config cluster-build.yaml
 kubectl taint nodes klusterfkd-control-plane node-role.kubernetes.io/control-plane-
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
-sleep 60
 
 # Install services
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
@@ -26,5 +22,3 @@ done
 
 # Apply manifest and finalise environment
 base64 -d -i cluster-config.yaml | kubectl apply -f -
-sleep 10
-curl -is localhost/echoserver |grep HTTP/1.1 
