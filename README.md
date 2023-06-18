@@ -2,7 +2,7 @@
 
 ## PoC
 
-Although `echoserver` is running in the cluster and configured to serve traffic on port 80, however when attempting to load echoserver through http://localhost/echoserver:80 the browser returns a 504 error.  In this `Failure in Kuberenetes Drill` you need to resolve the issue. 
+Although `echoserver` is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 timeout error is returned.  In this `Failure in Kuberenetes Drill` you need to resolve the issue. 
 
 To get going run `start.sh` to create and configure the cluster.
 
