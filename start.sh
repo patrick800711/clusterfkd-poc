@@ -22,4 +22,4 @@ done
 
 # Apply manifest and finalise environment
 base64 -d -i cluster-config.yaml | kubectl apply -f - >/dev/null
-echo "All set, enjoy!"
+echo "\033[0;32m\nAlthough echoserver is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 timeout error is returned. In this Failure in Kuberenetes Drill resolve the issue so echoserver traffic is served correctly.  Enjoy! \n"
