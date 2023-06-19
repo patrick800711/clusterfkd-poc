@@ -13,6 +13,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 helm repo add ealenn https://ealenn.github.io/charts >/dev/null
 helm repo update >/dev/null
 helm upgrade -i fkd ealenn/echo-server --namespace echoserver --create-namespace --force >/dev/null
+helm install fkd oci://registry-1.docker.io/bitnamicharts/nginx --namespace nginx --create-namespace >/dev/null
 echo -n "Waiting for pods to go ready (this may take a few minutes) ..."
 sleep 30
 while [ $ingressReady = "false" ]; do
