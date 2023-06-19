@@ -21,3 +21,7 @@ To get going run `start.sh` to create and configure the cluster.
 ## Cleanup
 
 When you are done use `kind delete cluster --name klusterfkd` to delete the KinD cluster from your system.
+
+## Known issues
+
+* Rate limiting from Docker hub is causing problems with Calico pods being able to pull images and thus the lab environment won't complete
