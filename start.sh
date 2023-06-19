@@ -40,4 +40,4 @@ done
 echo "\033[0;31m\nApplying scenario ..."
 tput init
 base64 -d -i cluster-config.yaml | kubectl apply -f -
-echo "\033[0;32m\nAlthough echoserver is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 timeout error is returned. In this Failure in Kuberenetes Drill resolve the issue so echoserver traffic is served correctly.  Enjoy! \n"
+echo "\033[0;32m\nAlthough echoserver is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 Gateway Time-out error is returned. \nIn this -= Failure in Kuberenetes Drill =- identify and resolve the issue so echoserver traffic is served correctly.  Enjoy! "
