@@ -3,16 +3,16 @@ ingressReady=false
 
 # Deploy and bootstrap cluster with calico
 kind create cluster --config cluster-build.yaml
-kubectl taint nodes klusterfkd-control-plane node-role.kubernetes.io/control-plane-
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml
+kubectl taint nodes klusterfkd-control-plane node-role.kubernetes.io/control-plane- >/dev/null
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml >/dev/null
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/custom-resources.yaml >/dev/null
 
 # Install services
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-helm repo add ealenn https://ealenn.github.io/charts
-helm repo update
-helm upgrade -i fkd ealenn/echo-server --namespace echoserver --create-namespace --force
-echo "Waiting for pods to go ready (this may take a few minutes) ..."
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml >/dev/null
+helm repo add ealenn https://ealenn.github.io/charts >/dev/null
+helm repo update >/dev/null
+helm upgrade -i fkd ealenn/echo-server --namespace echoserver --create-namespace --force >/dev/null
+echo "Waiting for pods to go ready (this may take a few minutes):"
 sleep 30
 while [ $ingressReady = "false" ]; do
   sleep 10
