@@ -23,11 +23,6 @@ done
 
 # Apply manifest and finalise environment
 echo "\033[0;31m\nApplying scenario ..."
-base64 -d -i cluster-config.yaml | kubectl apply -f -
-echo "\033[0;32m\nAlthough echoserver is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 timeout error is returned. In this Failure in Kuberenetes Drill resolve the issue so echoserver traffic is served correctly.  Enjoy! \n"
-
-echo -n "Waiting for pods to go ready (this may take a few minutes) ..."
-echo "\033[0;31m\nApplying scenario ..."
 tput init
-echo "blah\nblah\nblah"
+base64 -d -i cluster-config.yaml | kubectl apply -f -
 echo "\033[0;32m\nAlthough echoserver is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 timeout error is returned. In this Failure in Kuberenetes Drill resolve the issue so echoserver traffic is served correctly.  Enjoy! \n"
