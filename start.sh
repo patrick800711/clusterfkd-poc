@@ -2,7 +2,7 @@
 ingressReady=false
 
 # Deploy and bootstrap cluster with calico
-#kind create cluster --config cluster-build.yaml
+kind create cluster --config cluster-build.yaml
 echo "Bootstrapping cluster ..."
 kubectl taint nodes klusterfkd-control-plane node-role.kubernetes.io/control-plane- >/dev/null
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml >/dev/null
