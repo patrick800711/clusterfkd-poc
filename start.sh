@@ -1,5 +1,6 @@
 #!/bin/zsh
 ingressReady=false
+calicoReady=0
 
 # Deploy and bootstrap cluster with calico
 kind create cluster --config cluster-build.yaml
@@ -15,13 +16,20 @@ helm repo update >/dev/null
 helm upgrade -i fkd ealenn/echo-server --namespace echoserver --create-namespace --force >/dev/null
 helm install fkd oci://registry-1.docker.io/bitnamicharts/nginx --namespace nginx --create-namespace >/dev/null
 if [ $? -eq 0 ]; then # retry nginx install if fails
-  sleep 30
+  sleep 1
 else
-  helm install fkd oci://registry-1.docker.io/bitnamicharts/nginx --namespace nginx --create-namespace >/dev/null
-  sleep 30
+  echo "Retrying nginx install ..."
+  sleep 10
+  helm install fkd oci://registry-1.dockeßr.io/bitnamicharts/nginx --namespace nginx --create-namespace >/dev/null
 fi
+echo -n "Waiting for network (this may take a few minutes) ..."
+while [ $calicoReady -ne 3 ]; do
+  sleep 10
+  calicoReady=$(kubectl -n calico-system get pods -ojson | jq -r '.items[] | select(.status.containerStatuses[0].name=="calico-node") | .status.containerStatuses[].ready' | grep -c true)
+  echo -n "."
+done
 kubectl -n nginx delete svc fkd-nginx >/dev/null #delete default LoadBalancer service created by Nginx install
-echo -n "Waiting for pods to go ready (this may take a few minutes) ..."
+echo -n "\nWaiting for pods to go ready (this may take another minute) ..."
 while [ $ingressReady = "false" ]; do
   sleep 10
   ingressReady=$(kubectl -n ingress-nginx get pods -ojson | jq -r '.items[] | select(.metadata.name | test("ingress-nginx-controller.")) | .status.containerStatuses[].ready')
