@@ -5,14 +5,14 @@
 
 ## Pre-Requisettes
 
-* Docker (licensed)
+* Docker
 * KinD
 * Helm
 * jq
 
 ## PoC
 
-Although `echoserver` is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 timeout error is returned.  In this `Failure in Kuberenetes Drill` resolve the issue so echoserver traffic is served correctly.
+Although `echoserver` is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a '504 Gateway Time-out' error is returned.  In this `Failure in Kuberenetes Drill` identify and resolve the issue so echoserver traffic is served correctly.
 
 ## Getting Started
 
