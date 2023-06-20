@@ -5,6 +5,7 @@
 
 ## Pre-Requisettes
 
+* zsh
 * Docker
 * KinD
 * Helm
@@ -20,7 +21,7 @@ To get going run `start.sh` to create and configure the cluster.
 
 ## Cleanup
 
-When you are done use `kind delete cluster --name klusterfkd` to delete the KinD cluster from your system.
+When you are done use `./cleanup.sh` to delete the KinD cluster from your system.
 
 ## Known issues
 

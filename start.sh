@@ -3,7 +3,10 @@ ingressReady=false
 calicoReady=0
 
 # Deploy and bootstrap cluster with calico
-kind create cluster --config cluster-build.yaml
+#kind create cluster --config cluster-build.yaml --kubeconfig ./kind-kubeconfig-dw7fhna.yaml
+mv ./kind-kubeconfig-dw7fhna.yaml ~/.kube/contexts/kind-kubeconfig-dw7fhna.yaml
+source ~/.zshrc
+kubectl config use-context kind-klusterfkd
 echo "Bootstrapping cluster ..."
 kubectl taint nodes klusterfkd-control-plane node-role.kubernetes.io/control-plane- >/dev/null
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml >/dev/null
@@ -40,4 +43,5 @@ done
 echo "\033[0;31m\nApplying scenario ..."
 tput init
 base64 -d -i cluster-config.yaml | kubectl apply -f -
+kubectl config use-context klusterfkd
 echo "\033[0;32m\nAlthough echoserver is running in the cluster and configured to serve traffic on port 80 when attempting to browse http://localhost/echoserver a 504 Gateway Time-out error is returned. \nIn this -=Failure in Kuberenetes Drill=- identify and resolve the issue so echoserver traffic is served correctly.  Enjoy! "
